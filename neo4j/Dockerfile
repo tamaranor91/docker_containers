@@ -1,11 +1,10 @@
-  
-FROM %%NEO4J_BASE_IMAGE%%
+FROM openjdk:11-jdk-slim
 
-ENV NEO4J_SHA256=%%NEO4J_SHA%% \
-    NEO4J_TARBALL=%%NEO4J_TARBALL%% \
-    NEO4J_EDITION=%%NEO4J_EDITION%% \
+ENV NEO4J_SHA256=6da059f04f86e1a74221eb0103da38a1f645969cbbfe1b37c9de48bf55acabdc \
+    NEO4J_TARBALL=neo4j-community-4.1.3-unix.tar.gz \
+    NEO4J_EDITION=community \
     NEO4J_HOME="/var/lib/neo4j"
-ARG NEO4J_URI=%%NEO4J_DIST_SITE%%/%%NEO4J_TARBALL%%
+ARG NEO4J_URI=https://dist.neo4j.org/neo4j-community-4.1.3-unix.tar.gz
 ARG TINI_SHA256="12d20136605531b09a2c2dac02ccee85e1b874eb322ef6baf7561cd93f93c855"
 ARG TINI_URI="https://github.com/krallin/tini/releases/download/v0.18.0/tini"
 
@@ -50,3 +49,4 @@ EXPOSE 7474 7473 7687
 
 ENTRYPOINT ["/sbin/tini", "-g", "--", "/docker-entrypoint.sh"]
 CMD ["neo4j"]
+
